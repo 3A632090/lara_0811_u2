@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,34 +9,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//設定 Route 回傳字串
-Route::get('/',function(){
-    return'welcome';
+Route::get('say/{name?}', ['as'=> 'linjingbo',function ($name='everybody') {
+    return 'hello ,'.$name ;
+}]);
+Route::get('/',['as'=>'home.index','uses'=>'HomeController@index']);
+Route::get('deshboard',function (){
+    return 'deshboard';
 });
-//設定 Route 回傳 view
-Route::get('/',function(){
-    returnview('welcome');
+Route::group(['prefix'=>'admin'],function (){
+    Route::get('deshboard',function (){
+        return 'admin deshboard';
+    });
 });
-//設定 Route 跳轉頁面
-Route::get('/',function(){
-    returnredirect('welcome');
-});
-Route::get('hello/{name?}',function($name='Everybody'){return'Hello,'.$name;
-
-    Route::get('say/{name?}',['as'=>'hello.index',function($name=
-                                                           'Everybody'){
-        returnview('welcome');
-    }]);
-
-    Route::get('dashboard',function(){
-        return'dashboard';
-    });
-    Route::group(['prefix'=>'admin'],function(){
-        Route::get('dashboard',function(){
-            return'admindashboard';
-        });
-    });
-
-
-    });
